@@ -1,12 +1,19 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import eslintPlugin from 'vite-plugin-eslint'
-import { join } from 'path'
+import path, { join } from 'path'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      // 指定symbolId格式
+      symbolId: 'icon-[name]'
+    }),
     // 增加下面的配置项,这样在运行时就能检查 eslint 规范
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
@@ -26,7 +33,7 @@ export default defineConfig({
         // 代理请求之后的请求地址
         target: 'https://api.imooc-front.lgdsunday.club/',
         // 跨域
-        changeOrigin: true,
+        changeOrigin: true
       }
     }
   }
