@@ -82,6 +82,12 @@ watch(currentCategoryIndex, (val) => {
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
   isOpenPopup.value = false
+  setTimeout(() => {
+    itemRefs[currentCategoryIndex.value].scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center'
+    })
+  }, 200)
 }
 
 // popup 展示
