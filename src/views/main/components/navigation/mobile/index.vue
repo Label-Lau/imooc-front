@@ -13,6 +13,7 @@
       <!-- 汉堡按钮 -->
       <li
         class="z-20 fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white shadow-l-white"
+        @click="isOpenPopup = !isOpenPopup"
       >
         <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
       </li>
@@ -29,11 +30,16 @@
         {{ item.name }}
       </li>
     </ul>
+    <m-popup v-model="isOpenPopup">
+      <div>测试内容</div>
+    </m-popup>
   </div>
 </template>
 <script setup>
 import { ref, watch, onBeforeUpdate } from 'vue'
 import { useScroll } from '@vueuse/core'
+import mPopup from "@/libs/popup/index.vue";
+
 
 defineProps({
   data: {
@@ -77,4 +83,7 @@ watch(currentCategoryIndex, (val) => {
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
 }
+
+// popup 展示
+const isOpenPopup = ref(false)
 </script>
