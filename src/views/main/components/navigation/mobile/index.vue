@@ -31,15 +31,14 @@
       </li>
     </ul>
     <m-popup v-model="isOpenPopup">
-      <div>测试内容</div>
+      <menu-vue :categorys="data" @onItemClick="onItemClick"></menu-vue>
     </m-popup>
   </div>
 </template>
 <script setup>
 import { ref, watch, onBeforeUpdate } from 'vue'
 import { useScroll } from '@vueuse/core'
-import mPopup from "@/libs/popup/index.vue";
-
+import menuVue from '@/views/main/components/menu/index.vue'
 
 defineProps({
   data: {
@@ -82,6 +81,7 @@ watch(currentCategoryIndex, (val) => {
 // item 点击事件
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+  isOpenPopup.value = false
 }
 
 // popup 展示
