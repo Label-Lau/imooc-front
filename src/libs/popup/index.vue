@@ -12,7 +12,10 @@
       </transition>
       <!-- 内容 -->
       <transition name="popup-down-up">
-        <div v-if="isOpen" class="w-screen bg-white z-50 fixed bottom-0">
+        <div
+          v-if="isOpen"
+          class="w-screen bg-white dark:bg-zinc-800 z-50 fixed bottom-0"
+        >
           <slot />
         </div>
       </transition>

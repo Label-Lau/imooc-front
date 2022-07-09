@@ -5,8 +5,11 @@ import router from './router'
 import store from './store'
 
 import { useREM } from './utils/flexible'
+import useTheme from './utils/theme'
+
 import mLibs from './libs'
 import 'virtual:svg-icons-register'
 
 useREM()
+useTheme()
 createApp(App).use(router).use(store).use(mLibs).mount('#app')

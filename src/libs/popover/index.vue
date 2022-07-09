@@ -9,7 +9,7 @@
       <div
         ref="contentTarget"
         v-show="isVisible"
-        class="absolute p-1 z-20 bg-white border rounded-md"
+        class="absolute p-1 z-20 bg-white dark:bg-zinc-900 border rounded-md dark:border-zinc-700"
         :style="contentStyle"
       >
         <!-- 匿名插槽：弹出层出现的内容 -->
