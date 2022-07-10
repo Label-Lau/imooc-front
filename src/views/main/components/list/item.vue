@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1 h-[280px] w-[230px]"
-  >
+  <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1">
     <div class="relative w-full rounded cursor-zoom-in group">
       <!-- :src="data.photo" -->
       <img class="w-full rounded bg-transparent" :src="data.photo" alt="" />
@@ -31,17 +29,17 @@
           iconClass="fill-zinc-900 dark:fill-zinc-200"
         />
       </div>
-      <!-- 标题 -->
-      <p
-        class="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 line-clamp-2 px-1"
-      >
-        {{ data.title }}
-      </p>
-      <!-- 作者 -->
-      <div class="flex items-center mt-1 px-1">
-        <img class="h-2 w-2 rounded-full" :src="data.avatar" alt="" />
-        <span class="text-sm text-zinc-500 ml-1">{{ data.author }}</span>
-      </div>
+    </div>
+    <!-- 标题 -->
+    <p
+      class="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 line-clamp-2 px-1"
+    >
+      {{ data.title }}
+    </p>
+    <!-- 作者 -->
+    <div class="flex items-center mt-1 px-1">
+      <img class="h-2 w-2 rounded-full" :src="data.avatar" alt="" />
+      <span class="text-sm text-zinc-500 ml-1">{{ data.author }}</span>
     </div>
   </div>
 </template>

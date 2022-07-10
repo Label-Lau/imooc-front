@@ -1,6 +1,15 @@
 <template>
   <div>
-    <item-vue v-for="item in pexelsList" :key="item.id" :data="item"></item-vue>
+    <m-waterfall
+      :data="pexelsList"
+      :column="5"
+      :picturePreReading="false"
+      class="w-full px-1"
+    >
+      <template v-slot="{ item }">
+        <itemVue :data="item" />
+      </template>
+    </m-waterfall>
   </div>
 </template>
 
@@ -23,3 +32,5 @@ const getPexelsData = async () => {
 }
 getPexelsData()
 </script>
+
+<style lang="scss" scoped></style>
