@@ -252,4 +252,35 @@ watch(
     deep: true
   }
 )
+
+/**
+ * 监听列数变化，重新构建瀑布流
+ */
+const reset = () => {
+  // 延迟 100 毫秒，否则会导致宽度计算不正确
+  setTimeout(() => {
+    // 重新计算列宽
+    useColumnWidth()
+    // 重置所有的定位数据，因为 data 中进行了深度监听，所以该操作会触发 data 的 watch
+    props.data.forEach((item) => {
+      item._style = null
+    })
+  }, 100)
+}
+
+/**
+ * 监听列数变化
+ */
+watch(
+  () => props.column,
+  () => {
+    if (props.picturePreReading) {
+      // 在 picturePreReading 为 true 的前提下，需要首先为列宽滞空，列宽滞空之后，会取消瀑布流渲染
+      columnWidth.value = 0
+      nextTick(reset)
+    } else {
+      reset()
+    }
+  }
+)
 </script>
