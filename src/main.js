@@ -8,8 +8,9 @@ import { useREM } from './utils/flexible'
 import useTheme from './utils/theme'
 
 import mLibs from './libs'
+import mDirectives from './directives'
 import 'virtual:svg-icons-register'
 
 useREM()
 useTheme()
-createApp(App).use(router).use(store).use(mLibs).mount('#app')
+createApp(App).use(router).use(store).use(mLibs).use(mDirectives).mount('#app')
