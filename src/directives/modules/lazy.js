@@ -11,7 +11,6 @@ export default {
     el.src = ''
 
     const { stop } = useIntersectionObserver(el, ([{ isIntersecting }]) => {
-      console.log(isIntersecting)
       if (isIntersecting) {
         el.src = imgSrc
         stop()

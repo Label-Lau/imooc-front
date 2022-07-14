@@ -23,9 +23,11 @@
         v-for="(item, index) in $store.getters.categorys"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
-        :class="{ 'text-zinc-100': currentCategoryIndex === index }"
+        :class="{
+          'text-zinc-100': $store.getters.currentCategoryIndex === index
+        }"
         :ref="setItemRef"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>
@@ -39,6 +41,7 @@
 import { ref, watch, onBeforeUpdate } from 'vue'
 import { useScroll } from '@vueuse/core'
 import menuVue from '@/views/main/components/menu/index.vue'
+import store from '@/store'
 
 // 滑块
 const sliderStyle = ref({
@@ -60,20 +63,23 @@ onBeforeUpdate(() => {
 // 获取 ul 元素，以计算偏移位置
 const ulTarget = ref(null)
 const { x: ulScrollLeft } = useScroll(ulTarget)
-watch(currentCategoryIndex, (val) => {
-  // 获取选中元素的 left、width
-  const { left, width } = itemRefs[val].getBoundingClientRect()
-  // 为 sliderStyle 设置属性
-  const ulPadding = parseFloat(getComputedStyle(ulTarget.value)['padding'])
-  sliderStyle.value = {
-    // ul 横向滚动位置 + 当前元素的 left 偏移量
-    transform: `translateX(${ulScrollLeft.value + left - ulPadding}px)`,
-    width: width + 'px'
+watch(
+  () => store.getters.currentCategoryIndex,
+  (val) => {
+    // 获取选中元素的 left、width
+    const { left, width } = itemRefs[val].getBoundingClientRect()
+    // 为 sliderStyle 设置属性
+    const ulPadding = parseFloat(getComputedStyle(ulTarget.value)['padding'])
+    sliderStyle.value = {
+      // ul 横向滚动位置 + 当前元素的 left 偏移量
+      transform: `translateX(${ulScrollLeft.value + left - ulPadding}px)`,
+      width: width + 'px'
+    }
   }
-})
+)
 // item 点击事件
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+const onItemClick = (item) => {
+  store.commit('app/changeCurrentCategory', item)
   isOpenPopup.value = false
   setTimeout(() => {
     itemRefs[currentCategoryIndex.value].scrollIntoView({
@@ -84,5 +90,5 @@ const onItemClick = (index) => {
 }
 
 // popup 展示
-const isOpenPopup = ref(false)
+let isOpenPopup = ref(false)
 </script>
