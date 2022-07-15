@@ -18,7 +18,7 @@
         v-model="inputValue"
         @focus="onFocusHandler"
         @blur="onBlurHandler"
-        @keyup.enter="onSearchHandlder"
+        @keyup.enter="onSearchHandler"
       />
       <!-- 删除按钮 -->
       <m-svg-icon

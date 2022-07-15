@@ -1,4 +1,4 @@
-export const ICODE = 'C0FD7308BEA57817'
+export const ICODE = '8D35840A73EDF3C9'
 // PC 设备指定宽度
 export const PC_DEVICE_WIDTH = 1280
 // category 的本地构建数据
