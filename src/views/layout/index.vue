@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import headerVue from './components/header/index.vue'
-import mainVue from './components/main.vue'
-import floatingVue from './components/floating/index.vue'
+import HeaderVue from './components/header/index.vue'
+import MainVue from './components/main.vue'
+import FloatingVue from './components/floating/index.vue'
 </script>

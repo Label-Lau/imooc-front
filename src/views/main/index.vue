@@ -8,6 +8,6 @@
 </template>
 
 <script setup>
-import navigationVue from './components/navigation/index.vue'
-import listVue from './components/list/index.vue'
+import NavigationVue from './components/navigation/index.vue'
+import ListVue from './components/list/index.vue'
 </script>
