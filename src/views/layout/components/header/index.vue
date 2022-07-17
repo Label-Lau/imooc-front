@@ -5,7 +5,7 @@
     <div class="flex items-center">
       <img
         v-lazy
-        class="h-4 cursor-pointer mr-2"
+        class="guide-home h-4 cursor-pointer mr-2"
         src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"
         alt=""
         @click="onToHome"
@@ -18,9 +18,9 @@
 </template>
 
 <script setup>
-import headerSearchVue from './components/header-search/index.vue'
-import headerThemeVue from './components/header-theme.vue'
-import headerMyVue from './components/header-my.vue'
+import HeaderSearchVue from './components/header-search/index.vue'
+import HeaderThemeVue from './components/header-theme.vue'
+import HeaderMyVue from './components/header-my.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

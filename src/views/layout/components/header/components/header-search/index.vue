@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full guide-search">
     <m-search v-model="inputValue" @search="onSearchHandler">
       <template #dropdown>
         <div>
@@ -25,9 +25,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
-import hintVue from './hint.vue'
-import historyVue from './history.vue'
-import themeVue from './theme.vue'
+import HintVue from './hint.vue'
+import HistoryVue from './history.vue'
+import ThemeVue from './theme.vue'
 
 const store = useStore()
 const inputValue = ref('')
