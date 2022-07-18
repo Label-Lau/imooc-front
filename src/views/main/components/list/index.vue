@@ -13,10 +13,19 @@
         class="w-full px-1"
       >
         <template v-slot="{ item, width }">
-          <itemVue :data="item" :width="width" />
+          <itemVue :data="item" :width="width" @click="onToPins" />
         </template>
       </m-waterfall>
     </m-infinite-list>
+    <!-- 大图详情处理 -->
+    <transition
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @leave="leave"
+    >
+      <pins-vue v-if="isVisiblePins" :id="currentPins.id" />
+    </transition>
   </div>
 </template>
 
@@ -24,9 +33,14 @@
 import { ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { getPexelsList } from '@/api/pexels'
-import itemVue from './item.vue'
-import mInfiniteList from '@/libs/infinite-list/index.vue'
 import { isMobileTerminal } from '@/utils/flexible'
+import { useEventListener } from '@vueuse/core'
+
+import gsap from 'gsap'
+
+import ItemVue from './item.vue'
+import MInfiniteList from '@/libs/infinite-list/index.vue'
+import PinsVue from '@/views/pins/components/pins.vue'
 
 /**
  * 构建数据请求
@@ -106,6 +120,63 @@ watch(
     })
   }
 )
+
+// 控制 pins 展示
+const isVisiblePins = ref(false)
+// 当前选中的 pins 属性
+const currentPins = ref({})
+/**
+ * 进入 pins
+ */
+const onToPins = (item) => {
+  console.log(item)
+  history.pushState(null, null, `/pins/${item.id}`)
+  currentPins.value = item
+  isVisiblePins.value = true
+}
+
+const beforeEnter = (el) => {
+  console.log(currentPins.value)
+  gsap.set(el, {
+    scaleX: 0,
+    scaleY: 0,
+    transformOrigin: '0 0',
+    translateX: currentPins.value.localtion?.translateX,
+    translateY: currentPins.value.localtion?.translateY,
+    opacity: 0
+  })
+}
+const enter = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 1,
+    scaleY: 1,
+    transformOrigin: '0 0',
+    translateX: 0,
+    translateY: 0,
+    opacity: 1,
+    onComplete: done
+  })
+}
+const leave = (el, done) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 0,
+    scaleY: 0,
+    transformOrigin: '0 0',
+    x: currentPins.value.localtion?.translateX,
+    y: currentPins.value.localtion?.translateY,
+    opacity: 0,
+    onComplete: done
+  })
+}
+
+/**
+ * 监听浏览器后退按钮事件
+ */
+useEventListener(window, 'popstate', () => {
+  isVisiblePins.value = false
+})
 </script>
 
 <style lang="scss" scoped></style>
