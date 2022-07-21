@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,6 +13,7 @@
     "driver.js": "^0.9.8",
     "file-saver": "^2.0.5",
     "gsap": "^3.10.4",
+    "vee-validate": "^4.6.2",
     "vue": "^3.2.25",
     "vue-router": "^4.0.16",
     "vuex": "^4.0.2",
