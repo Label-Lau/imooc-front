@@ -10,3 +10,14 @@ export const getCaptcha = (data) => {
     data
   })
 }
+
+/**
+ * 登录
+ */
+export const loginUser = (data) => {
+  return request({
+    url: '/sys/login',
+    method: 'POST',
+    data
+  })
+}
