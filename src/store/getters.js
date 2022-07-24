@@ -1,3 +1,5 @@
+import { isMobileTerminal } from "@/utils/flexible";
+
 export default {
   categorys: (state) => state.category.categorys,
   themeType: (state) => state.theme.themeType,
@@ -18,5 +20,11 @@ export default {
   /**
    * 获取用户信息
    */
-  userInfo: (state) => state.user.userInfo
+  userInfo: (state) => state.user.userInfo,
+  routerType:(state) => {
+    if (!isMobileTerminal.value) {
+      return 'none'
+    }
+    return state.app.routerType
+  }
 }

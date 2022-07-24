@@ -65,8 +65,8 @@
 import { randomRGB } from '@/utils/color'
 import { saveAs } from 'file-saver'
 import { message } from '@/libs/message'
-import { useFullscreen, useElementBounding } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { useFullscreen } from '@vueuse/core'
+import { ref } from 'vue'
 
 const props = defineProps({
   data: {
@@ -105,21 +105,34 @@ const { enter: onImgFullScreen } = useFullscreen(imgTarget)
 const onToPinsClick = () => {
   emits('click', {
     id: props.data.id,
-    localtion: imgContainerCenter.value
+    localtion: imgContainerCenter()
   })
 }
 
 /**
  * pins 跳转处理，记录图片的中心点（X|Y位置 + 宽|高的一半）
  */
-const {
-  x: imgContainerX,
-  y: imgContainerY,
-  width: imgContainerWidth,
-  height: imgContainerHeight
-} = useElementBounding(imgTarget)
-const imgContainerCenter = computed(() => ({
-  translateX: parseInt(imgContainerX.value + imgContainerWidth.value / 2),
-  translateY: parseInt(imgContainerY.value + imgContainerHeight.value / 2)
-}))
+// const {
+//   x: imgContainerX,
+//   y: imgContainerY,
+//   width: imgContainerWidth,
+//   height: imgContainerHeight
+// } = useElementBounding(imgTarget)
+// const imgContainerCenter = computed(() => ({
+//   translateX: parseInt(imgContainerX.value + imgContainerWidth.value / 2),
+//   translateY: parseInt(imgContainerY.value + imgContainerHeight.value / 2)
+// }))
+
+const imgContainerCenter = () => {
+  const {
+    x: imgContainerX,
+    y: imgContainerY,
+    width: imgContainerWidth,
+    height: imgContainerHeight
+  } = imgTarget.value.getBoundingClientRect()
+  return {
+    translateX: parseInt(imgContainerX + imgContainerWidth / 2),
+    translateY: parseInt(imgContainerY + imgContainerHeight / 2)
+  }
+}
 </script>

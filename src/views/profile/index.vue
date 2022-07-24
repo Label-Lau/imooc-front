@@ -192,6 +192,8 @@ const onSelectImgHandler = () => {
  * 移动端后退处理
  */
 const onNavbarLeftClick = () => {
+  // 移动端下跳转的类型
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 

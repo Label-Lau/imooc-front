@@ -1,5 +1,5 @@
 <template>
-  <m-popover class="flex items-center" placement="bottom-left" >
+  <m-popover class="flex items-center" placement="bottom-left">
     <template #reference>
       <div
         v-if="$store.getters.token"
@@ -55,9 +55,9 @@
 </template>
 
 <script setup>
-import { confirm } from "@/libs";
+import { confirm } from '@/libs'
 import { useRouter } from 'vue-router'
-import { useStore } from "vuex";
+import { useStore } from 'vuex'
 const store = useStore()
 
 // 构建 menu 数据源
@@ -85,6 +85,8 @@ const menuArr = [
 // 进入登录
 const router = useRouter()
 const onToLogin = () => {
+  // 移动端下跳转的类型
+  store.commit('app/changeRouterType', 'push')
   router.push('/login')
 }
 
@@ -94,6 +96,8 @@ const onToLogin = () => {
 const onItemClick = (path) => {
   // 有路径则进行路径跳转
   if (path) {
+    // 移动端下跳转的类型
+    store.commit('app/changeRouterType', 'push')
     router.push(path)
     return
   }
@@ -103,5 +107,4 @@ const onItemClick = (path) => {
     store.dispatch('user/logout')
   })
 }
-
 </script>
