@@ -10,6 +10,7 @@ import useTheme from './utils/theme'
 import mLibs from './libs'
 import mDirectives from './directives'
 import 'virtual:svg-icons-register'
+import './permission'
 
 useREM()
 useTheme()

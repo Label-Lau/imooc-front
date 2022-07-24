@@ -1,7 +1,6 @@
 import { loginUser, getProfile, registerUser } from '@/api/sys'
 import md5 from 'md5'
 import { message } from '@/libs'
-import router from '@/router'
 
 export default {
   namespaced: true,
@@ -61,7 +60,6 @@ export default {
     async logout({ commit }) {
       commit('setToken', '')
       commit('setUserInfo', {})
-      await router.push('/')
       // 退出登录之后，重新刷新下页面，因为对于前台项目而言，用户是否登录（是否为 VIP）看到的数据可能不同
       location.reload()
     },
