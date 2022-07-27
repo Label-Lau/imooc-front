@@ -48,8 +48,6 @@ const sliderStyle = ref({
   transform: 'translateX(0px)',
   width: '52px'
 })
-// 选中 item 的下标
-const currentCategoryIndex = ref(0)
 // 获取填充的 item 元素
 let itemRefs = []
 const setItemRef = (el) => {
@@ -82,9 +80,10 @@ const onItemClick = (item) => {
   store.commit('app/changeCurrentCategory', item)
   isOpenPopup.value = false
   setTimeout(() => {
-    itemRefs[currentCategoryIndex.value].scrollIntoView({
+    itemRefs[store.getters.currentCategoryIndex].scrollIntoView({
       behavior: 'smooth',
-      inline: 'center'
+      inline: 'center',
+      block: 'nearest'
     })
   }, 200)
 }
