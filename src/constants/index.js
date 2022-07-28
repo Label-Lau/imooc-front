@@ -40,7 +40,11 @@ export const CATEGORY_NOMAR_DATA = [
 ]
 // 登录方式
 export const LOGIN_TYPE_USERNAME = 'username'
+export const LOGIN_TYPE_OAUTH_NO_REGISTER_CODE = 204
+export const LOGIN_TYPE_QQ = 'QQ'
+export const LOGIN_TYPE_WX = 'WX'
 // STS 上传数据
 export const REGION = 'oss-cn-beijing'
 export const BUCKET = 'imooc-front'
+
 

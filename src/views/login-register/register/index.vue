@@ -65,6 +65,7 @@
           <div class="mb-2">
             <a
               class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
+              target="__black"
               @click="onToLogin"
             >
               去登录
@@ -106,12 +107,14 @@ import {
   validatePassword,
   validateConfirmPassword
 } from '../validate'
-import { LOGIN_TYPE_USERNAME } from "@/constants";
-import { ref } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { LOGIN_TYPE_USERNAME } from '@/constants'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+
 const store = useStore()
 const router = useRouter()
+const route = useRoute()
 
 /**
  * 插入规则
@@ -135,7 +138,7 @@ const regForm = ref({
 })
 // loading
 const loading = ref(false)
-
+console.log(route)
 /**
  * 触发注册
  */
@@ -146,8 +149,11 @@ const onRegister = async () => {
       username: regForm.value.username,
       password: regForm.value.password
     }
-    // 触发注册
-    await store.dispatch('user/register', payload)
+    // 触发注册，携带第三方数据
+    await store.dispatch('user/register', {
+      ...payload,
+      ...route.query
+    })
     // 注册成功，触发登录
     await store.dispatch('user/login', {
       ...payload,
@@ -158,6 +164,6 @@ const onRegister = async () => {
   }
   await router.push('/')
 }
-
-
 </script>
+
+<style lang="scss" scoped></style>
