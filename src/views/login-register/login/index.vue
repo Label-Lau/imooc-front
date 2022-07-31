@@ -2,6 +2,7 @@
   <div
     class="relative h-screen bg-white dark:bg-zinc-800 text-center xl:bg-zinc-200"
   >
+    <!-- 头部图标：PC端 -->
     <header-vue></header-vue>
     <!-- 表单区 -->
     <div
@@ -42,6 +43,7 @@
           name="password"
         >
         </vee-error-message>
+
         <div class="pt-1 pb-3 leading-[0px] text-right">
           <a
             class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
@@ -50,7 +52,6 @@
             去注册
           </a>
         </div>
-
         <m-button
           class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
           :loading="loading"
@@ -64,7 +65,7 @@
         <!-- QQ -->
         <qq-login-vue></qq-login-vue>
         <!-- 微信 -->
-        <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
+        <wx-login-vue></wx-login-vue>
       </div>
     </div>
     <!-- 人类行为验证模块 -->
@@ -75,6 +76,12 @@
     ></slider-captcha-vue>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'login'
+}
+</script>
 
 <script setup>
 import HeaderVue from '../components/header.vue'
@@ -88,8 +95,12 @@ import { validateUsername, validatePassword } from '../validate'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import QqLoginVue from './qq-login.vue'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
+import QqLoginVue from './qq-login.vue'
+import WxLoginVue from './weixin-login.vue'
+
+const store = useStore()
+const router = useRouter()
 
 // 控制 sliderCaptcha 展示
 const isSliderCaptchaVisible = ref(false)
@@ -112,12 +123,14 @@ const onCaptchaSuccess = async () => {
 
 // 登录时的 loading
 const loading = ref(false)
-
+// 用户输入的用户名和密码
+const loginForm = ref({
+  username: '',
+  password: ''
+})
 /**
  * 用户登录行为
  */
-const store = useStore()
-const router = useRouter()
 const onLogin = async () => {
   loading.value = true
   // 执行登录操作
@@ -132,12 +145,6 @@ const onLogin = async () => {
   await router.push('/')
 }
 
-// 用户输入的用户名和密码
-const loginForm = ref({
-  username: '',
-  password: ''
-})
-
 /**
  * 进入注册页面
  */
@@ -147,3 +154,5 @@ const onToRegister = () => {
   router.push('/register')
 }
 </script>
+
+<style lang="scss" scoped></style>

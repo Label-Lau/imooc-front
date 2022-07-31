@@ -77,7 +77,7 @@ const openQQWindow = async () => {
     // 登录成功,关闭通知
     brodacast.clear()
     // 执行登录操作
-    oauthLogin(LOGIN_TYPE_QQ, oauthObj)
+    await oauthLogin(LOGIN_TYPE_QQ, oauthObj)
   })
 }
 </script>
